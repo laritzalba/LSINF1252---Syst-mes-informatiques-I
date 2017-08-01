@@ -39,7 +39,7 @@ if(get==1 && value!=1)// if bit dans la position pos est 1 et value !=1
 else // if bit dans la position pos est 0 et value !=0
     if(get==0 && value!=0)  
        return (x | (value << pos));
-else return x;//  On ne dois rien modifier  
+else return x;//  On ne dois pas modifier, c'est le meme valeur.  
 
 }
 
@@ -49,7 +49,7 @@ unsigned char get_3_leftmost_bits(unsigned int x) {
 }
 
 unsigned char get_4_rightmost_bits(unsigned int x) {
-    return x & 0xF; // x& 0000 0000 0000 1111
+    return x & 0xF; // x& 0000 0000 0000 0000 0000 0000 0000 1111
 }
 
 unsigned int unset_last_bit(unsigned int x) {
@@ -77,7 +77,9 @@ return r;
 }
 
 
-/*Print unsigned int in binary
+/*
+Print unsigned int in binary
+Pas demande
 */
 void toBin(unsigned int byte){    
     int i;
