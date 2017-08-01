@@ -1,1 +1,3 @@
-# LSINF1252---Syst-mes-informatiques-I
+# LSINF1252  Systemes Informatiques-I
+# Laritza Cabrera Alba 
+
