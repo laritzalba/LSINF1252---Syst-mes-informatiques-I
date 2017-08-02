@@ -99,4 +99,5 @@ toBin(n);
 toBin( cycle_bits(n, 25));
 
 printf("\n END MAIN \n");
+return 0;
 }
