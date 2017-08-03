@@ -30,11 +30,10 @@ typedef struct BSTreeNode {
 
 int has_key(Node root, int key) {
     if ((root.key) == key) return 1;
-    if (root.left==NULL && root.right==NULL) return 0;
             if (key < root.key){
-            return has_key( *(root.left), key);            
+            return root.left != NULL ? has_key( *(root.left), key) : 0;            
         } else {            
-            return has_key( *(root.right), key);
+            return root.right != NULL ? has_key( *(root.right), key) : 0;
         }
 }
 
