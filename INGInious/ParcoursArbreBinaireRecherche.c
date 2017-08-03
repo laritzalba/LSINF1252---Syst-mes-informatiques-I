@@ -28,25 +28,13 @@ typedef struct BSTreeNode {
     struct BSTreeNode *right;
 } Node;
 
-
-
 int has_key(Node root, int key) {
     if ((root.key) == key) return 1;
     if (root.left==NULL && root.right==NULL) return 0;
             if (key < root.key){
-            Node TempLeft;
-            TempLeft.key =   root.left->key;
-            TempLeft.value = root.left->value;
-            TempLeft.right = root.left->right;
-            TempLeft.left =  root.left->left;
-            return has_key( TempLeft, key);            
-        } else {
-            Node TempRight;
-            TempRight.key =   root.right->key;
-            TempRight.value = root.right->value;
-            TempRight.right = root.right->right;
-            TempRight.left =  root.right->left;
-            return has_key( TempRight, key);
+            return has_key( *(root.left), key);            
+        } else {            
+            return has_key( *(root.right), key);
         }
 }
 
@@ -56,78 +44,48 @@ if (root_a.key == root_b.key  && root_a.value == root_b.value ) {
     if (root_a.left== NULL  && root_a.right==NULL && root_b.left == NULL && root_b.right == NULL){
         return 1;
     } else if (root_a.left!=NULL && root_a.right!=NULL && root_b.left!=NULL && root_b.right!=NULL){ 
-                Node TempLeftA;
-                TempLeftA.key =   root_a.left->key;
-                TempLeftA.value = root_a.left->value;
-                TempLeftA.right = root_a.left->right;
-                TempLeftA.left =  root_a.left->left;
-
-                Node TempLeftB;
-                TempLeftB.key =   root_b.left->key;
-                TempLeftB.value = root_b.left->value;
-                TempLeftB.right = root_b.left->right;
-                TempLeftB.left =  root_b.left->left;
-                
-                Node TempRightA;
-                TempRightA.key =   root_a.right->key;
-                TempRightA.value = root_a.right->value;
-                TempRightA.right = root_a.right->right;
-                TempRightA.left =  root_a.right->left;
-
-                Node TempRightB;
-                TempRightB.key =   root_b.right->key;
-                TempRightB.value = root_b.right->value;
-                TempRightB.right = root_b.right->right;
-                TempRightB.left =  root_b.right->left;
-                return (compare( TempLeftA, TempLeftB) & compare( TempRightA, TempRightB)); 
+                return (compare( *(root_a.left), *(root_b.left)) && compare( *(root_a.right), *(root_b.right))); 
             }else return 0;  
 }else return 0;
 }
 
-
 int main(int argc, char **argv){
 
 printf("tests Main\n");
-Node root_a;
-root_a.key= 3;
-root_a.value=300;
 
-root_a.right= (struct BSTreeNode *) malloc (sizeof(struct BSTreeNode));
-root_a.right->key=4;
-root_a.right->value=400;
-root_a.right->right=NULL;
-root_a.right->left=NULL;
+Node *tree_a= (Node *) malloc (sizeof(Node));
+tree_a->key=3;
+tree_a->value=300;
+tree_a->right= (struct BSTreeNode *) malloc (sizeof(struct BSTreeNode));
+tree_a->right->key=4;
+tree_a->right->value=400;
+tree_a->right->right=NULL;
+tree_a->right->left=NULL;
+tree_a->left= (struct BSTreeNode *) malloc (sizeof(struct BSTreeNode));
+tree_a->left->key=2;
+tree_a->left->value=200;
+tree_a->left->right=NULL;
+tree_a->left->left=NULL;
 
-root_a.left= (struct BSTreeNode *) malloc (sizeof(struct BSTreeNode));
-root_a.left->key=2;
-root_a.left->value=200;
-root_a.left->right=NULL;
-root_a.left->left=NULL;
+Node *tree_b= (Node *) malloc (sizeof(Node));
+tree_b->key= 37;
+tree_b->value=300;
+tree_b->right= (struct BSTreeNode *) malloc (sizeof(struct BSTreeNode));
+tree_b->right->key=4;
+tree_b->right->value=400;
+tree_b->right->right=NULL;
+tree_b->right->left=NULL;
+tree_b->left= (struct BSTreeNode *) malloc (sizeof(struct BSTreeNode));
+tree_b->left->key=2;
+tree_b->left->value=200;
+tree_b->left->right=NULL;
+tree_b->left->left=NULL;
 
+int t= has_key( *tree_a, 4);
+printf("Binary tree has_key ?  answer= %i\n", t);
 
-
-Node root_b;
-root_b.key= 3;
-root_b.value=300;
-
-root_b.right= (struct BSTreeNode *) malloc (sizeof(struct BSTreeNode));
-root_b.right->key=4;
-root_b.right->value=400;
-root_b.right->right=NULL;
-root_b.right->left=NULL;
-
-root_b.left= (struct BSTreeNode *) malloc (sizeof(struct BSTreeNode));
-root_b.left->key=2;
-root_b.left->value=200;
-root_b.left->right=NULL;
-root_b.left->left=NULL;
-
-int r= has_key( root_a, 4);
-printf("Binary tree has_key ?  answer= %i\n", r);
-
-
-int r2= compare( root_a, root_b);
-printf("Are binary tree equals? answer= %i", r2);
+int t2= compare( *tree_a, *tree_b);
+printf("Are binary tree equals? answer= %i", t2);
 
 printf("\n END MAIN \n");
 return 0;
