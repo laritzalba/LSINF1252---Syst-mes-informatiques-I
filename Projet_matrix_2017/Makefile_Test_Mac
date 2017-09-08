@@ -1,0 +1,10 @@
+build:
+	gcc -g -Wall -W -Werror -std=gnu99 -c matrix.c
+	gcc -std=gnu99 -I/usr/local/Cellar/cunit/2.1-3/include -L/usr/local/Cellar/cunit/2.1-3/lib -lcunit -o test matrix.o test.c
+	./test
+.PHONY: clean rebuild
+
+clean:
+	rm -f *.o test
+
+rebuild: clean build
